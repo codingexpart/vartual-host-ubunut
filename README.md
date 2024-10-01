@@ -1,14 +1,11 @@
 
-
-
-
 Go To the root of linux and move apache2 `sites-available`
 ``` shelll
 cd /etc/apache2/sites-available
  ```
 Copy `default-ssl.conf`
 ``` shelll
-sudo cp default-ssl.conf folderName.conf
+sudo cp default-ssl.conf cf.conf
  ```
 Check is file copy or not?
 ``` shelll
@@ -16,28 +13,45 @@ ls
  ```
 Make the file empty
 ``` shell
-sudo truncate -s 0 folderName.conf
+sudo truncate -s 0 cf.conf
 ```
 Now open in nano
 ```
-sudo nano folderName.conf
+sudo nano cf.conf
 ```
 Pest the code 
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    ServerName folderName.local
-    ServerAlias www.folderName.local
-    DocumentRoot /var/www/folderName
+    ServerName cf.local
+    ServerAlias www.cf.local
+    DocumentRoot /var/www/cf
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+
+<Directory /var/www/cf>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
 ```
+Create vertial host
+
+```
+sudo a2ensite cf.conf
+```
+Restart Server
+```
+sudo systemctl reload apache2
+```
+
 Check is that available or not
 
 ```
 cd ..
-cd /sites-enabled
+cd sites-enabled
+ls
 ```
 Updeate Host file
 ```
@@ -45,7 +59,7 @@ sudo nano /etc/hosts
 ```
 update your file name in host 
 ```
-127.0.0.1 folderName.local
+127.0.0.1 cf.local
 ```
 copy project to `/var/www` 
 
