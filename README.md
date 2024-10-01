@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Text Change</title>
-    <script>
-        function updateText() {
-            const inputValue = document.getElementById("name").value;
-            const displayText = document.getElementById("display");
-            displayText.textContent = inputValue ? `Hello, ${inputValue}!` : 'Hello!';
-        }
-    </script>
-</head>
-<body>
-    <input type="text" id="name" name="name" oninput="updateText()" placeholder="Enter your name"/>
-    <p id="display">Hello!</p>
-</body>
-</html>
 
 
 
